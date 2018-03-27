@@ -25,8 +25,8 @@ reliability.l <- function(fx, id, data, iv_name = NULL){
   d$var_1 <- ifelse(d$var_1 <= 0, NA, d$var_1)
   d$var_2 <- ifelse(d$var_2 <= 0, NA, d$var_2)
   d <- na.exclude(d)
-  d$lnv1 <- log(d$var_1)
-  d$lnv2 <- log(d$var_2)
+  d$lnv1 <- 100*log(d$var_1)
+  d$lnv2 <- 100*log(d$var_2)
   d$delta <- (d$var_2-d$var_1)
   d$pct_chg <- 100 * (d$var_2-d$var_1)/d$var_1
   d$lndelta <- d$lnv1-d$lnv2
@@ -49,7 +49,7 @@ reliability.l <- function(fx, id, data, iv_name = NULL){
   cat("Cohens d:", prettyNum(CD), "\n")
   cat("\nReliability:", "\n")
   cat("\n      Typical error: ", prettyNum(TE))
-  cat("\n      Coefficient of Variability: ", prettyNum(CV))
+  cat("\n      Typical error as a CV (%): ", prettyNum(CV))
   cat("\n      IntRAclass correlation coefficient: ", prettyNum(ICC))
   cat("\n      Pearson correlation coefficient (r, IntERclass correlation): ", prettyNum(cor(d$var_1, d$var_2)))
   cat("\n      Coefficient of Variability (r^2): ", prettyNum(cor(d$var_1, d$var_2)^2), "\n")
