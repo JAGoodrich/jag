@@ -54,3 +54,4 @@ reliability.l <- function(fx, id, data, iv_name = NULL){
   cat("\n      Pearson correlation coefficient (r, IntERclass correlation): ", prettyNum(cor(d$var_1, d$var_2)))
   cat("\n      Coefficient of Variability (r^2): ", prettyNum(cor(d$var_1, d$var_2)^2), "\n")
 }
+
