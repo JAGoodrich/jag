@@ -22,16 +22,20 @@ reliability.l <- function(fx, id, data, iv_name = NULL){
   names(temp2)[1] <- paste("dv", l[2], sep = "_")
   d <- inner_join(temp1, temp2,  by = "id")
   d <-data.frame(var_1 = d[,1], var_2 = d[,3])
-  d$var_1 <- ifelse(d$var_1 <= 0, NA, d$var_1)
-  d$var_2 <- ifelse(d$var_2 <= 0, NA, d$var_2)
-  d <- na.exclude(d)
-  d$lnv1 <- 100*log(d$var_1)
-  d$lnv2 <- 100*log(d$var_2)
+  n1 <- length(d$var_1)
+  n2 <- length(d$var_2)
+  if(n1 != n2) {warning("Variable 1 and Variable 2 do not have equal number of observations")}
+  d$var_1_pos <- ifelse(d$var_1 <= 0, NA, d$var_1) #THIS IS POTENTIAL ISSUE!
+  d$var_2_pos <- ifelse(d$var_2 <= 0, NA, d$var_2) #THIS IS POTENTIAL ISSUE!
+  d <- na.exclude(d) ##THIS IS POTENTIAL ISSUE!
+  d$lnv1 <- 100*log(d$var_1_pos)
+  d$lnv2 <- 100*log(d$var_2_pos)
   d$delta <- (d$var_2-d$var_1)
   d$pct_chg <- 100 * (d$var_2-d$var_1)/d$var_1
   d$lndelta <- d$lnv1-d$lnv2
   TE <- sd(d$delta)/sqrt(2)
-  CD <- mean(d$delta) / sd(d$delta)
+  psd <- sqrt(((n1-1)*var(d$var_1) + (n2-1)*var(d$var_2))/(n1 + n2 - 2))
+  CD <- (mean(d$var_2) -  mean(d$var_1)) / psd
   CV <- 100*(exp((sd(d$lndelta)/sqrt(2))/100)-1)
   ICC <- irr::icc(d[,c(1,2)], model = "twoway", type = "agreement")$value
   par(mfrow=c(1,3))
