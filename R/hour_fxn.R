@@ -1,5 +1,5 @@
 #' @export
-#' @import modes
+#' @imports modes
 hour_fxn <- function(x){
   hours <- vector(mode = "numeric", length = length(x))
   for(i in 1:length(x)){

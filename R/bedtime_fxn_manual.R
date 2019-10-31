@@ -1,5 +1,5 @@
 #' @export
-#' @import modes
+#' @imports modes
 bedtime_fxn_manual <- function(x, low_cut, high_cut){
   hours <- vector(mode = "numeric", length = length(x))
   for(i in 1:length(x)){

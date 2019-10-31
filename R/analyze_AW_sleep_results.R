@@ -10,7 +10,7 @@
 #'
 #'
 #' @importFrom stringr str_pad
-#' @import dplyr stringr hms activpalProcessing
+#' @imports dplyr stringr hms activpalProcessing lubridate 
 analyze_AW_sleep_results <- function(data, cutoff_hrs_for_mutiple_sleep_periods) {
   if(is.null(cutoff_hrs_for_mutiple_sleep_periods)) cutoff_hrs_for_mutiple_sleep_periods = 2
   
