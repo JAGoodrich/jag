@@ -1,6 +1,5 @@
 #' @export
-#' @importFrom irr icc
-#' @import dplyr
+#' @imports dplyr irr
 reliability.w <- function(var_1, var_2){ #Requires , irr
   d <-data.frame(var_1, var_2)
   d <- na.exclude(d)
