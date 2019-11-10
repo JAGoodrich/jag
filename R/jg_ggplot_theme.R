@@ -5,9 +5,7 @@
 #' \code{jg_ggplot_theme} sets the ggplot theme
 #'
 #'
-#' @imports ggplot2
-#' @imports ggthemes
-#' 
+#' @imports ggplot2 ggthemes
 jg_ggplot_theme <- function(rel.size, bold = FALSE){
   ggplot2::theme_set(theme_tufte())
   if(bold == FALSE){
