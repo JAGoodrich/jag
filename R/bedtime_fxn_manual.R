@@ -1,5 +1,5 @@
 #' @export
-#' @imports modes
+
 bedtime_fxn_manual <- function(x, low_cut, high_cut){
   hours <- vector(mode = "numeric", length = length(x))
   for(i in 1:length(x)){
@@ -11,6 +11,6 @@ bedtime_fxn_manual <- function(x, low_cut, high_cut){
 
   times <- ifelse(temp$group == "24hr_am", temp$hours + 24,
                   ifelse(temp$group == "12hr", temp$hours + 12, temp$hours))
-  if(modes::bimodality_coefficient(na.omit(times),fig = FALSE) > 5/9) stop("Output likely bimodal; check input")
+  # if(modes::bimodality_coefficient(na.omit(times),fig = FALSE) > 5/9) stop("Output likely bimodal; check input")
   return(times)
 }

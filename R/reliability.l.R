@@ -1,6 +1,5 @@
 #' @export
 #' @importFrom irr icc
-#' @imports dplyr
 #' 
 reliability.l <- function(fx, id, data, iv_name = NULL){
   data <- droplevels(data)
